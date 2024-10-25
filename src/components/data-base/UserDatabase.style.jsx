@@ -100,3 +100,11 @@ export const EmptyImgBD = styled.div`
     }
   }
 `;
+
+export const UserInfo = styled.div``;
+export const UserDetail = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-style: oblique;
+  text-transform: capitalize;
+`;

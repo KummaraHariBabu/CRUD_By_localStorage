@@ -44,9 +44,9 @@ const EditUser = () => {
 
     // Optionally clear the form or navigate to another page
     setUser({ name: "", company: "", salary: "" });
+    alert("User data updated successfully!");
     navigate("/userdatabase");
   };
-
 
   return (
     <Container>
@@ -59,6 +59,7 @@ const EditUser = () => {
           name="name"
           value={user.name}
           onChange={changeHandler}
+          required
         />
         <label htmlFor="company">Company</label>
         <input
@@ -67,6 +68,7 @@ const EditUser = () => {
           name="company"
           value={user.company}
           onChange={changeHandler}
+          required
         />
         <label htmlFor="salary">Salary</label>
         <input
@@ -75,6 +77,7 @@ const EditUser = () => {
           name="salary"
           value={user.salary}
           onChange={changeHandler}
+          required
         />
         <button type="submit">Update</button>
       </Form>

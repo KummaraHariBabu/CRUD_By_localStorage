@@ -5,6 +5,8 @@ import {
   User,
   LinkBtn,
   EmptyImgBD,
+  UserInfo,
+  UserDetail
 } from "./UserDatabase.style";
 import emptyUser from "../../assets/empty-users-database.avif";
 const UserDatabase = () => {
@@ -16,11 +18,15 @@ const UserDatabase = () => {
   }, []);
 
   const handleDeleteUser = (index) => {
-    const updateUsers = [...users];
-
-    updateUsers.splice(index, 1);
-    localStorage.setItem("users", JSON.stringify(updateUsers));
-    setUsers(updateUsers);
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this user's data?"
+    );
+    if (confirmDelete) {
+      const updateUsers = [...users];
+      updateUsers.splice(index, 1);
+      localStorage.setItem("users", JSON.stringify(updateUsers));
+      setUsers(updateUsers);
+    }
   };
   return (
     <UsersContainer>
@@ -33,9 +39,20 @@ const UserDatabase = () => {
                 <div className="user-top">
                   <h3>User {index + 1}</h3>
                 </div>
-                <p>Name : {user.name}</p>
-                <p>Company : {user.company}</p>
-                <p>Salary : {user.salary}</p>
+                <UserInfo>
+                  <UserDetail>
+                    <span>Name:</span>
+                    <span>{user.name}</span>
+                  </UserDetail>
+                  <UserDetail>
+                    <span>Company:</span>
+                    <span> {user.company}</span>
+                  </UserDetail>
+                  <UserDetail>
+                    <span>Salary:</span>
+                    <span>{user.salary}</span>
+                  </UserDetail>
+                </UserInfo>
                 <div className="btn-wrapper">
                   <LinkBtn to={`/edituser/${index}`}>Edit</LinkBtn>
                   <LinkBtn onClick={() => handleDeleteUser(index)}>

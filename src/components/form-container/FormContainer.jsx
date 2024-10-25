@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container,Form } from "./FormContainer.style";
+import { Container, Form } from "./FormContainer.style";
 
 const FormContainer = () => {
   const [user, setUser] = useState({
@@ -17,20 +17,18 @@ const FormContainer = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     // Get existing users from localStorage (if any)
     const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-
     // Add the new user to the array
     const updatedUsers = [...existingUsers, user];
-
     // Store the updated array back in localStorage
     localStorage.setItem("users", JSON.stringify(updatedUsers));
-
     console.log("User data stored in localStorage:", updatedUsers);
 
     // Clear the form after submission
     setUser({ name: "", company: "", salary: "" });
+    alert("User details have been successfully saved to the database.");
+
   };
 
   return (
@@ -44,6 +42,7 @@ const FormContainer = () => {
           name="name"
           value={user.name || ""}
           onChange={changeHandler}
+          required
         />
         <label htmlFor="company">Company</label>
         <input
@@ -52,6 +51,7 @@ const FormContainer = () => {
           name="company"
           value={user.company || ""}
           onChange={changeHandler}
+          required
         />
         <label htmlFor="salary">Salary</label>
         <input
@@ -60,8 +60,9 @@ const FormContainer = () => {
           name="salary"
           value={user.salary || ""}
           onChange={changeHandler}
+          required
         />
-        <button type="submit">Submit</button>
+        <button type="submit">Create</button>
       </Form>
     </Container>
   );
